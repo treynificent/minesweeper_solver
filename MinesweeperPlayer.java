@@ -283,7 +283,7 @@ System.out.println("unable to make deduction");
 		boolean p;
 		int i, j, s;
 		do{
-			s = 0;	
+			s = 0;	/* 1-1 */
 			for (i = 0; i < h; ++i){
 				for (j = 0; j < w - 2; ++j){
 					if (sweeped[i][j] == 1 || sweeped[i][j + 1] == 1 || state[i][j] != 1 || state[i][j + 1] != 1){
@@ -451,7 +451,7 @@ System.out.println("unable to make deduction");
 						}
 					}
 				}
-			}
+			}   /* 1-2-1*/
 			for (i = 0; i < h; ++i){
 				for (j = 0; j < w - 2; ++j){
 					if (sweeped[i][j] == 1 || sweeped[i][j + 1] == 1 || sweeped[i][j + 2] == 1 || state[i][j] != 1 || state[i][j + 1] != 2 || state[i][j + 2] != 1){
@@ -514,6 +514,100 @@ System.out.println("unable to make deduction");
 								++s;
 							}
 							state[i + 2][j + 1] = MinesweeperBoard.MINE;
+						}	
+					}
+				}
+			} /* 1-2-2-1*/
+			for (i = 0; i < h; ++i){
+				for (j = 0; j < w - 3; ++j){
+					if (sweeped[i][j] == 1 || sweeped[i][j + 1] == 1 || sweeped[i][j + 2] == 1 || sweeped[i][j + 3] == 1 || state[i][j] != 1 || state[i][j + 1] != 2 || state[i][j + 2] != 2 || state[i][j + 3] != 1){
+						continue;
+					}
+					if (i > 0){
+						if (i == h - 1 || (state[i + 1][j] == 0 && state[i + 1][j + 1] == 0 && state[i + 1][j + 2] == 0 && state[i + 1][j + 3] == 0)){
+							if (state[i - 1][j] == MinesweeperBoard.HIDDEN){
+								Point pt = new Point(j, i - 1);
+								board.revealTile(i - 1, j);
+								state[i - 1][j] = board.getTile(i - 1, j);
+								rc.remove(pt);
+								++s;
+							}
+							state[i - 1][j + 1] = MinesweeperBoard.MINE;
+							state[i - 1][j + 2] = MinesweeperBoard.MINE;
+							if (state[i - 1][j + 3] == MinesweeperBoard.HIDDEN){
+								Point pt = new Point(j + 3, i - 1);
+								board.revealTile(i - 1, j + 3);
+								state[i - 1][j + 3] = board.getTile(i - 1, j + 3);
+								rc.remove(pt);
+								++s;
+							}
+						}
+					}
+					if (i < h - 1){ 
+						if (i == 0 || (state[i - 1][j] == 0 && state[i - 1][j + 1] == 0 && state[i - 1][j + 2] == 0 && state[i - 1][j + 3] == 0)){
+							if (state[i + 1][j] == MinesweeperBoard.HIDDEN){
+								Point pt = new Point(j, i + 1);
+								board.revealTile(i + 1, j);
+								state[i + 1][j] = board.getTile(i + 1, j);
+								rc.remove(pt);
+								++s;
+							}
+							state[i + 1][j + 1] = MinesweeperBoard.MINE;
+							state[i + 1][j + 2] = MinesweeperBoard.MINE;
+							if (state[i + 1][j + 3] == MinesweeperBoard.HIDDEN){
+								Point pt = new Point(j + 3, i + 1);
+								board.revealTile(i + 1, j + 3);
+								state[i + 1][j + 3] = board.getTile(i + 1, j + 3);
+								rc.remove(pt);
+								++s;
+							}
+						}	
+					}
+				}
+			}
+			for (j = 0; j < w; ++j){
+				for (i = 0; i < h - 3; ++i){
+					if (sweeped[i][j] == 1 || sweeped[i + 1][j] == 1 || sweeped[i + 2][j] == 1 || sweeped[i + 3][j] == 1 || state[i][j] != 1 || state[i + 1][j] != 2 || state[i + 2][j] != 2 || state[i + 3][j] != 1){
+						continue;
+					}
+					if (j > 0){
+						if (j == w - 1 || (state[i][j + 1] == 0 && state[i + 1][j + 1] == 0 && state[i + 2][j + 1] == 0 && state[i + 3][j + 1] == 0)){
+							if (state[i][j - 1] == MinesweeperBoard.HIDDEN){
+								Point pt = new Point(j - 1, i);
+								board.revealTile(i, j - 1);
+								state[i][j - 1] = board.getTile(i, j - 1);
+								rc.remove(pt);
+								++s;
+							}
+							state[i + 1][j - 1] = MinesweeperBoard.MINE;
+							state[i + 2][j - 1] = MinesweeperBoard.MINE;
+							if (state[i + 3][j - 1] == MinesweeperBoard.HIDDEN){
+								Point pt = new Point(j - 1, i + 3);
+								board.revealTile(i + 3, j - 1);
+								state[i + 3][j - 1] = board.getTile(i + 3, j - 1);
+								rc.remove(pt);
+								++s;
+							}
+						}
+					}
+					if (j < w - 1){ 
+						if (j == 0 || (state[i][j - 1] == 0 && state[i + 1][j - 1] == 0 && state[i + 2][j - 1] == 0 && state[i + 3][j - 1] == 0)){
+							if (state[i][j + 1] == MinesweeperBoard.HIDDEN){
+								Point pt = new Point(j + 1, i);
+								board.revealTile(i, j + 1);
+								state[i][j + 1] = board.getTile(i, j + 1);
+								rc.remove(pt);
+								++s;
+							}
+							state[i + 1][j + 1] = MinesweeperBoard.MINE;
+							state[i + 2][j + 1] = MinesweeperBoard.MINE;
+							if (state[i + 3][j + 1] == MinesweeperBoard.HIDDEN){
+								Point pt = new Point(j + 1, i + 3);
+								board.revealTile(i + 3, j + 1);
+								state[i + 3][j + 1] = board.getTile(i + 3, j + 1);
+								rc.remove(pt);
+								++s;
+							}
 						}	
 					}
 				}
