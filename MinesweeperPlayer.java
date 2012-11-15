@@ -542,7 +542,7 @@ System.out.println("unable to make deduction");
 						continue;
 					}
 					if (i > 0){
-						if (i == h - 1 || (state[i + 1][j] == 0 && state[i + 1][j + 1] == 0 && state[i + 1][j + 2] == 0 && state[i + 1][j + 3] == 0)){
+						if (i == h - 1 || (state[i + 1][j] != MinesweeperBoard.HIDDEN && state[i + 1][j] != MinesweeperBoard.MINE && state[i + 1][j + 1] != MinesweeperBoard.HIDDEN && state[i + 1][j + 1] != MinesweeperBoard.MINE && state[i + 1][j + 2] != MinesweeperBoard.HIDDEN && state[i + 1][j + 2] != MinesweeperBoard.MINE && state[i + 1][j + 3] != MinesweeperBoard.HIDDEN && state[i + 1][j + 3] != MinesweeperBoard.MINE)){
 							if (state[i - 1][j] == MinesweeperBoard.HIDDEN){
 								Point pt = new Point(j, i - 1);
 								board.revealTile(i - 1, j);
@@ -566,7 +566,7 @@ System.out.println("unable to make deduction");
 						}
 					}
 					if (i < h - 1){ 
-						if (i == 0 || (state[i - 1][j] == 0 && state[i - 1][j + 1] == 0 && state[i - 1][j + 2] == 0 && state[i - 1][j + 3] == 0)){
+						if (i == 0 || (state[i - 1][j] != MinesweeperBoard.HIDDEN && state[i - 1][j] != MinesweeperBoard.MINE && state[i - 1][j + 1] != MinesweeperBoard.HIDDEN && state[i - 1][j + 1] != MinesweeperBoard.MINE && state[i - 1][j + 2] != MinesweeperBoard.HIDDEN && state[i - 1][j + 2] != MinesweeperBoard.MINE && state[i - 1][j + 3] != MinesweeperBoard.HIDDEN && state[i - 1][j + 3] != MinesweeperBoard.MINE)){
 							if (state[i + 1][j] == MinesweeperBoard.HIDDEN){
 								Point pt = new Point(j, i + 1);
 								board.revealTile(i + 1, j);
@@ -597,7 +597,7 @@ System.out.println("unable to make deduction");
 						continue;
 					}
 					if (j > 0){
-						if (j == w - 1 || (state[i][j + 1] == 0 && state[i + 1][j + 1] == 0 && state[i + 2][j + 1] == 0 && state[i + 3][j + 1] == 0)){
+						if (j == w - 1 || (state[i][j + 1] != MinesweeperBoard.HIDDEN && state[i][j + 1] != MinesweeperBoard.MINE && state[i + 1][j + 1] != MinesweeperBoard.HIDDEN && state[i + 1][j + 1] != MinesweeperBoard.MINE && state[i + 2][j + 1] != MinesweeperBoard.HIDDEN && state[i + 2][j + 1] != MinesweeperBoard.MINE && state[i + 3][j + 1] != MinesweeperBoard.HIDDEN && state[i + 3][j + 1] != MinesweeperBoard.MINE)){
 							if (state[i][j - 1] == MinesweeperBoard.HIDDEN){
 								Point pt = new Point(j - 1, i);
 								board.revealTile(i, j - 1);
@@ -621,7 +621,7 @@ System.out.println("unable to make deduction");
 						}
 					}
 					if (j < w - 1){ 
-						if (j == 0 || (state[i][j - 1] == 0 && state[i + 1][j - 1] == 0 && state[i + 2][j - 1] == 0 && state[i + 3][j - 1] == 0)){
+						if (j == 0 || (state[i][j - 1] != MinesweeperBoard.HIDDEN && state[i][j - 1] != MinesweeperBoard.MINE && state[i + 1][j - 1] != MinesweeperBoard.HIDDEN && state[i + 1][j - 1] != MinesweeperBoard.MINE && state[i + 2][j - 1] != MinesweeperBoard.HIDDEN && state[i + 2][j - 1] != MinesweeperBoard.MINE && state[i + 3][j - 1] != MinesweeperBoard.HIDDEN && state[i + 3][j - 1] != MinesweeperBoard.MINE)){
 							if (state[i][j + 1] == MinesweeperBoard.HIDDEN){
 								Point pt = new Point(j + 1, i);
 								board.revealTile(i, j + 1);
